@@ -1,5 +1,7 @@
-name: Python
+name: Python Q04
 
+on:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,3 +23,19 @@ jobs:
 
       - name: Check
         run: python -m py_compile src/main.py
+
+      - name: Tests
+        run: pytest -v
+  
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - name: Build Docker
+        run: docker build -t DIM0517_2026_Prova_U2 .
+
+      - name: Rodar a Imagem
+        run: docker run -d --name prova -p 8080:8080 DIM0517_2026_Prova_U2
