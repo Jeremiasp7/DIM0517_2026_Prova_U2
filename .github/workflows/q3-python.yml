@@ -1,5 +1,9 @@
-name: Python
+name: Python Q03
 
+on:
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   build:
@@ -21,4 +25,17 @@ jobs:
 
       - name: Check
         run: python -m py_compile src/main.py
-
+  
+  varenv:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: writes
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - name: env
+        env:
+          TAG: "build-${{ github.run_id }}"
+        run: echo "Env - $TAG"
