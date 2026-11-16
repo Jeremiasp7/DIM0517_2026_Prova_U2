@@ -30,9 +30,6 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: python
     steps:
       - name: Build Docker
         run: docker build -t DIM0517_2026_Prova_U2 .
