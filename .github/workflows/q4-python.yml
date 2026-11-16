@@ -30,9 +30,16 @@ jobs:
   docker:
     needs: build
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: python
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
       - name: Build Docker
-        run: docker build -t asusinventory .
+        run: docker build -t asusinventory:ci .
 
       - name: Rodar a Imagem
-        run: docker run -d --name prova -p 8080:8080 asusinventory
+        run: docker run -d --name prova -p 8080:8080 asusinventory:ci
