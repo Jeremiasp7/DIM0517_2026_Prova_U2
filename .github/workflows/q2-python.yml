@@ -1,4 +1,9 @@
-name: Python
+name: Python Q02
+
+on:
+  pull_request:
+    branches:
+      - develop
 
 
 jobs:
@@ -20,3 +25,9 @@ jobs:
       - name: Check
         run: python -m py_compile src/main.py
 
+      - name: Testes
+        run: pytest -v
+
+      - name: Erro nos Testes
+        if: failure()
+        run: echo Erro nos testes
