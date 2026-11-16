@@ -6,6 +6,8 @@ app = FastAPI()
 
 # mais um teste, só pra garantir né
 
+# último, prometo
+
 @app.get("/hello")
 def hello():
     return {"message": "Hello, World!"}
